@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 interface IProps {
     Next: ()=>void;
     disabled: boolean;
-    halls: object[];
+    halls: hallsInterface[]|undefined;
     // any other props that come into the component
 }
 
@@ -16,20 +16,22 @@ interface itemInterface {
     // any other props that come into the component
 }
 
+interface hallsInterface {
+    description: string;
+    id: number;
+    img: string;
+    place: string;
+}
+
 
 
 function AddConcert({Next, disabled, halls}:IProps) {
-
     return (
         <>
             <Link to={'/showUsers'}>Show users</Link>
                 <label>Place:
-                    {/*<input disabled={disabled} name="place" type="text" placeholder="Place"/>*/}
-                    <select>
-                        {halls.map((item: itemInterface) =>
-                            (<option>{item.place}</option>)
-                        )}
-
+                    <select name="place">
+                        {halls && halls.map((item:hallsInterface)=>(<option value={item.place} key = {item.id}>{item.place}</option>))}
                     </select>
                 </label>
                 <label>ImgSrc:

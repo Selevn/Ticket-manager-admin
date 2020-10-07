@@ -25,7 +25,6 @@ function AddConcertContainer() {
             // @ts-ignore TODO: fix
             const response = await fetch(backendUrl + "/api/concerts/getHalls", {method, body, headers} )
             const data = await response.json()
-            console.log("data",data)
             if (!response.ok) {
                 if(data.serverStatus === 500)
                 {
@@ -43,7 +42,7 @@ function AddConcertContainer() {
                     })
             }
             else {
-                setHalls(data);
+                setHalls(data.data);
             }
         }
         __();
@@ -57,7 +56,7 @@ function AddConcertContainer() {
         // @ts-ignore TODO: fix
         const response = await fetch(backendUrl + "/api/concerts/next", {method, body, headers} )
                     const data = await response.json()
-        console.log("data",data)
+                    console.log("data",data)
                     if (!response.ok) {
                         if(data.serverStatus === 500)
                         {
