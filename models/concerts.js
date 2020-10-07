@@ -29,7 +29,7 @@ const getSectorsByPlace = (place, cb)=>{
 }
 
 const setSectorCost = (sectorId, concertId, cost, cb)=>{
-  connection.query(`INSERT (cost, sectorId, concertId) INTO costs VALUES (?,?,?)`,[cost, sectorId, concertId],
+  connection.query(`INSERT INTO costs (cost, sectorId, concertId)  VALUES (?,?,?)`,[cost, sectorId, concertId],
     function (err, data) {
       if (err)
         cb(err, null);
@@ -38,7 +38,7 @@ const setSectorCost = (sectorId, concertId, cost, cb)=>{
     })
 }
 const addConcert = (band,place,date,imgSrc, cb)=>{
-  connection.query(`INSERT (band, place, date, imgSrc) INTO costs VALUES (?,?,?,?)`,[band,place,date,imgSrc],
+  connection.query(`INSERT INTO concerts (band, place, date, imgSrc) VALUES (?,?,?,?)`,[band,place,date,imgSrc],
     function (err, data) {
       if (err)
         cb(err, null);
@@ -46,6 +46,9 @@ const addConcert = (band,place,date,imgSrc, cb)=>{
         cb(null, data);
     })
 }
+
+
+
 
 
 
