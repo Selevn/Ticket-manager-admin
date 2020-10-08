@@ -41,8 +41,21 @@ const getUserConcerts = (userId, cb)=>{
     })
 }
 
+const getUserByEmail = (email, cb)=>{
+  connection.query(`SELECT * FROM users WHERE email = (?)`,[email],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
+
+
+
 
 
 module.exports.getAllUsers = getAllUsers
+module.exports.getUserByEmail = getUserByEmail
 module.exports.getUserConcerts = getUserConcerts
 module.exports.getConcertTickets = getConcertTickets

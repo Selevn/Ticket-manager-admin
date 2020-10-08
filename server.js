@@ -11,6 +11,7 @@ app.use(express.json({extended: true}))
 
 app.use('/api/concerts',cors(corsOptions),require("./routes/addConcertRouter.js"))
 app.use('/api/users',cors(corsOptions),require("./routes/addUserRouter.js"))
+app.use('/api/login',cors(corsOptions),require("./routes/addUserRouter.js"))
 
 const PORT = 3003;
 
