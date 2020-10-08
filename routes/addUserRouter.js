@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {getAllUsers,getUserTickets} = require('../models/users.js')
+const {getAllUsers,getUserConcerts,getConcertTickets} = require('../models/users.js')
 const concertRouter = Router()
 
 concertRouter.post("/getAllUsers",
@@ -12,16 +12,27 @@ concertRouter.post("/getAllUsers",
     })
   })
 
-concertRouter.post("/getUserTickets",
+concertRouter.post("/getConcertTickets",
   async (request, response) => {
-  console.log(request.body)
-    await getUserTickets(request.body.userId, (err,data)=>{
+    await getConcertTickets(request.body.userId,request.body.concertId , (err,data)=>{
       if(err)
         response.status(500).json({err:err})
       else
         response.status(200).json({data: data})
     })
   })
+
+concertRouter.post("/getUserConcerts",
+  async (request, response) => {
+    await getUserConcerts(request.body.userId, (err,data)=>{
+      if(err)
+        response.status(500).json({err:err})
+      else
+        response.status(200).json({data: data})
+    })
+  })
+
+
 
 
 

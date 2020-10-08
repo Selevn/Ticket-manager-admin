@@ -18,8 +18,21 @@ const getAllUsers = (cb)=>{
     })
 }
 
-const getUserTickets = (userId, cb)=>{
-  connection.query(`SELECT * FROM ticket WHERE userId = ?`,[userId],
+const getConcertTickets = (userId, concertId, cb)=>{
+  connection.query(`SELECT t.id, con.band, con.place, sec.name, cos.cost FROM ticket t
+left JOIN concerts con on con.id=t.concertId
+left join sector sec on sec.id = t.sectorId
+left join costs cos on cos.concertId = t.concertId AND cos.sectorId = t.sectorId
+WHERE t.userId = ? AND t.concertId = ?`,[userId, concertId],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
+const getUserConcerts = (userId, cb)=>{
+  connection.query(`SELECT con.id as concertId, con.band, con.place, count(con.id) as ticketCount  FROM ticket t inner JOIN concerts con on con.id=t.concertId WHERE t.userId = ? group by con.id`,[userId],
     function (err, data) {
       if (err)
         cb(err, null);
@@ -28,5 +41,8 @@ const getUserTickets = (userId, cb)=>{
     })
 }
 
+
+
 module.exports.getAllUsers = getAllUsers
-module.exports.getUserTickets = getUserTickets
+module.exports.getUserConcerts = getUserConcerts
+module.exports.getConcertTickets = getConcertTickets
