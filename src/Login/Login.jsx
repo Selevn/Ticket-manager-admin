@@ -2,9 +2,15 @@ import React, {useMemo} from "react";
 import PropTypes from "prop-types"
 
 import style from "./Login.module.css"
+import {useHistory} from "react-router";
+import {useAuth} from "../customHooks/auth.hook.js";
 
 const Login = ({email, onMailChange, password, onPasswordChange, loginHandler, registerHandler, loading}) => {
+  const {isLoggined} = useAuth()
+  const history = useHistory();
+
   document.getElementsByTagName("title")[0].innerText = "Login"
+  if(!isLoggined())
   return (
     <>
               <div className={style.loginContainer} id="loginContainer">
@@ -39,6 +45,10 @@ const Login = ({email, onMailChange, password, onPasswordChange, loginHandler, r
               </div>
     </>
   )
+  else{
+    history.push("/")
+    return (<></>)
+  }
 };
 Login.propTypes = {
   email: PropTypes.string,

@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useAuth} from "../customHooks/auth.hook";
+import {useHistory} from "react-router";
 
 interface IProps {
     Next: () => void;
@@ -45,6 +47,9 @@ interface refsInerface {
 
 
 function AddConcert({Next, disabled, halls, refs, sectors, Confirm}: IProps) {
+  const {isLoggined} = useAuth()
+  const history = useHistory();
+  if (isLoggined())
     return (
         <>
             <Link to={'/showUsers'}>Show users</Link>
@@ -83,7 +88,12 @@ function AddConcert({Next, disabled, halls, refs, sectors, Confirm}: IProps) {
                     <button onClick={Confirm}>Confirm</button>
                 </>)}
         </>
-    );
+    )
+  else
+  {
+    history.push('/login');
+    return(<></>)
+  }
 }
 
 export default AddConcert;

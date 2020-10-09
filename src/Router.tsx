@@ -7,12 +7,12 @@ import LoginContaineer from "./Login/Login.container.jsx";
 
 function Router() {
   return (
-    <>
+      <>
         <Switch>
-            <Route path='/login' component={LoginContaineer}/>
-            <Route path='/addConcert' component={AddConcertContainer}/>
-            <Route path='/showUsers' component={ShowUsersContainer}/>
-            <Route path='/' component={AdminContainer}/>
+          <Route path='/login' component={LoginContaineer}/>
+          <Route path='/addConcert' component={AddConcertContainer}/>
+          <Route path='/showUsers' component={ShowUsersContainer}/>
+          <Route path='/' component={AdminContainer}/>
         </Switch>
       </>
   );

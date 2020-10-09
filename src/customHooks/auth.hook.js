@@ -1,10 +1,7 @@
 import React, {useCallback, useContext} from "react";
-//import {LoginContext} from "../components/Contexts/LoginContext.js";
+import {LoginContext} from "../Contexts/LoginContext.ts";
 import * as jwt from "jsonwebtoken";
 
-const LoginContext = React.createContext(
-  const userId,setUserId = 
-);
 
 const storage = "userStorage"
 export const useAuth = () => {
@@ -14,14 +11,12 @@ export const useAuth = () => {
     debugger;
     loginContext.setUserId(id)
     loginContext.setToken(JWT)
-    loginContext.setUserType(type)
     localStorage.setItem(storage, JSON.stringify({userId: id, token: JWT, userType: type}))
   }, [])
 
   const logout = useCallback(() => {
     loginContext.setUserId(null)
     loginContext.setToken(null)
-    loginContext.setUserType(null)
     localStorage.removeItem(storage)
   }, [])
 

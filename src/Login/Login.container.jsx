@@ -4,6 +4,7 @@ import Login from "./Login.jsx";
 import {useAuth} from "../customHooks/auth.hook.js";
 
 import 'materialize-css'
+import {useHistory} from "react-router";
 
 const LoginContainer = () => {
 
@@ -11,19 +12,18 @@ const LoginContainer = () => {
   let [email, setEmail] = useState("")
   let [password, setPassword] = useState("")
 
+  const history = useHistory();
 
   const loginHandler = async () => {
     try {
-      //const data = await request(, "POST", {email: email, password: password})
-
         let method = "POST",
           body = JSON.stringify({email: email, password: password}),
           headers = {"Content-Type":'application/json'}
 
       const response = await fetch("http://localhost:3003" + "/api/login/login", {method, body, headers})
       const data = await response.json()
-      console.log(data)
       authHook.login(data.token, data.id, data.userType)
+      authHook.isLoggined() && history.push("/")
     } catch (e) {
       window.M.toast({html: e.message, displayLength: 5000, classes: "error"})
     }
