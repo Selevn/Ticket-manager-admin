@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {addConcert, setSectorCost, getHalls, getSectorsByPlace} = require('../models/concerts.js')
+const {addConcert, setSectorCost, getHalls, getSectorsByPlace, getAllConcerts,deleteConcert,newConcertData,undoConcert} = require('../models/concerts.js')
 const concertRouter = Router()
 //const {getUserByEmail, setUser, getSecret, approve} = require('../models/users.js')
 concertRouter.post("/next",
@@ -20,8 +20,50 @@ concertRouter.post("/getHalls",
       else
         response.status(200).json({data: data})
     });
-
   })
+
+concertRouter.post("/getAllConcerts",
+  async (request, response) => {
+    await getAllConcerts((err,data) => {
+      if(err)
+        response.status(500).json({err: err})
+      else
+        response.status(200).json({data: data})
+    });
+  })
+
+concertRouter.post("/delete",
+  async (request, response) => {
+    await deleteConcert(request.body.concertId, (err,data) => {
+      if(err)
+        response.status(500).json({err: err})
+      else
+        response.status(200).json({data: data})
+    });
+  })
+
+concertRouter.post("/change",
+  async (request, response) => {
+    await newConcertData(request.body.concertId,request.body.date, (err,data) => {
+      if(err)
+        response.status(500).json({err: err})
+      else
+        response.status(200).json({data: data})
+    });
+  })
+
+concertRouter.post("/undo",
+  async (request, response) => {
+    await undoConcert(request.body.concertId, (err,data) => {
+      if(err)
+        response.status(500).json({err: err})
+      else
+        response.status(200).json({data: data})
+    });
+  })
+
+
+
 
 concertRouter.post("/addConcert",
   async (request, response) => {

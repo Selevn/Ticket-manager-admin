@@ -18,6 +18,18 @@ const getHalls = (cb)=>{
     })
 }
 
+const getAllConcerts = (cb)=>{
+  connection.query(`SELECT * FROM concerts`,
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
+
+
+
 const getSectorsByPlace = (place, cb)=>{
   connection.query(`SELECT * FROM sector WHERE place = ?`,[place],
     function (err, data) {
@@ -47,12 +59,42 @@ const addConcert = (band,place,date,imgSrc, cb)=>{
     })
 }
 
+const deleteConcert = (id, cb)=>{
+  connection.query(`DELETE FROM concerts WHERE id = ?`,[id],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
 
+const undoConcert = (id, cb)=>{
+  connection.query(`UPDATE concerts SET status = 2 WHERE id = ?`,[id],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
 
-
+const newConcertData = (id,date, cb)=>{
+  connection.query(`UPDATE concerts SET date = ?, status=1 WHERE id = ?`,[date,id],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
 
 
 module.exports.addConcert = addConcert
 module.exports.setSectorCost = setSectorCost
 module.exports.getSectorsByPlace = getSectorsByPlace
+module.exports.getAllConcerts = getAllConcerts
+module.exports.deleteConcert = deleteConcert
+module.exports.undoConcert = undoConcert
+module.exports.newConcertData = newConcertData
 module.exports.getHalls = getHalls

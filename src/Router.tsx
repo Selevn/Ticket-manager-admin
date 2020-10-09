@@ -3,7 +3,8 @@ import {Switch, Route} from 'react-router-dom';
 import AdminContainer from './Admin/Admin.container'
 import AddConcertContainer from "./AddConcert/AddConcert.container";
 import ShowUsersContainer from "./ShowUsers/ShowUsers.container";
-import LoginContaineer from "./Login/Login.container.jsx";
+import LoginContaineer from "./Login/Login.container";
+import ShowConcertsContainer from "./ShowConcerts/ShowConcerts.container";
 
 function Router() {
   return (
@@ -12,6 +13,7 @@ function Router() {
           <Route path='/login' component={LoginContaineer}/>
           <Route path='/addConcert' component={AddConcertContainer}/>
           <Route path='/showUsers' component={ShowUsersContainer}/>
+          <Route path='/showConcerts' component={ShowConcertsContainer}/>
           <Route path='/' component={AdminContainer}/>
         </Switch>
       </>

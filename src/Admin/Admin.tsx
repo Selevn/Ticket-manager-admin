@@ -11,6 +11,7 @@ function Admin({logout}:{logout:()=>void}) {
         <>
             <Link to={'/addConcert'}>Add Concert</Link>
             <Link to={'/showUsers'}>Show tickets</Link>
+            <Link to={'/showConcerts'}>Show concerts</Link>
           <button onClick = {logout}>Logout</button>
         </>
     )
