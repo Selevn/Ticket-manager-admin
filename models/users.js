@@ -51,6 +51,16 @@ const getUserByEmail = (email, cb)=>{
     })
 }
 
+const deleteUser = (id, cb)=>{
+  connection.query(`DELETE FROM users WHERE id = (?)`,[id],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
+
 
 
 
@@ -59,3 +69,4 @@ module.exports.getAllUsers = getAllUsers
 module.exports.getUserByEmail = getUserByEmail
 module.exports.getUserConcerts = getUserConcerts
 module.exports.getConcertTickets = getConcertTickets
+module.exports.deleteUser = deleteUser

@@ -5,7 +5,15 @@ import style from "./Login.module.css"
 import {useHistory} from "react-router";
 import {useAuth} from "../customHooks/auth.hook.js";
 
-const Login = ({email, onMailChange, password, onPasswordChange, loginHandler, registerHandler, loading}) => {
+const Login = ({email, onMailChange, password, onPasswordChange, loginHandler}:
+                   {
+                     email:string,
+                     password:string,
+                     onMailChange:(event:{ target: { value:string; }; })=>void;
+                     onPasswordChange:(event:{ target: { value: string; }; })=>void;
+                     loginHandler:()=>void,
+
+                   }) => {
   const {isLoggined} = useAuth()
   const history = useHistory();
 
@@ -37,7 +45,7 @@ const Login = ({email, onMailChange, password, onPasswordChange, loginHandler, r
                         tabIndex={3}
                         className={style.loginBut}
                         onClick={loginHandler}
-                        disabled={loading}>Sign in
+                        >Sign in
                       </button>
                     </div>
                   </div>

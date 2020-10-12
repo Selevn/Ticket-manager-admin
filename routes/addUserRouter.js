@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {getAllUsers,getUserConcerts,getConcertTickets,getUserByEmail} = require('../models/users.js')
+const {deleteUser,getAllUsers,getUserConcerts,getConcertTickets,getUserByEmail} = require('../models/users.js')
 const concertRouter = Router()
 
 
@@ -87,6 +87,17 @@ concertRouter.post("/getConcertTickets",
 concertRouter.post("/getUserConcerts",
   async (request, response) => {
     await getUserConcerts(request.body.userId, (err,data)=>{
+      if(err)
+        response.status(500).json({err:err})
+      else
+        response.status(200).json({data: data})
+    })
+  })
+
+concertRouter.post("/deleteUser",
+  async (request, response) => {
+  console.log("in router",request.body.userId)
+    await deleteUser(request.body.userId, (err,data)=>{
       if(err)
         response.status(500).json({err:err})
       else

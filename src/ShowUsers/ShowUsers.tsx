@@ -3,9 +3,12 @@ import {Link} from 'react-router-dom';
 import {useHistory} from "react-router";
 import {useAuth} from "../customHooks/auth.hook";
 
-function ShowUsers({users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert}: {
+function ShowUsers({searchChange,search,users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
   users: { id: number, email: string }[],
   showUserConcerts: (userId: number) => void,
+  deleteUser: (userId: number) => void,
+  searchChange: (event: { target: { value: string; }; }) => void,
+  search:string,
   showConcertTickets: (userId: number, concertId: number) => void,
   tickets: { id: number, cost: number, band: string, name: string, place: string }[],
   concerts: { concertId: number, ticketCount: number, band: string, place: string }[],
@@ -18,14 +21,16 @@ function ShowUsers({users, showUserConcerts, showConcertTickets, tickets, concer
     return (
         <>
           <Link to={'/'}>Home</Link>
+          <input onChange={searchChange} value={search}/>
           {users[0] && users.map(item => (<>
             <div key={item.id} onClick={() => {
               showUserConcerts(item.id)
             }}>
               {item.email}
             </div>
+            <button onClick = {()=>{deleteUser(item.id); return false}}>Delete</button>
             <div>
-              {item.id === currentUser && concerts.map(_item => {
+              {item.id === currentUser &&concerts[0]&& concerts.map(_item => {
                 return (
                     <>
                       <div className={String(_item.concertId)} onClick={() => {

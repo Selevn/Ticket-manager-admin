@@ -8,6 +8,12 @@ function ShowUsersContainer() {
     const users:{id:number, email:string}[] = _users[0];
     const setUsers = _users[1];
 
+    const _allusers = useState([]);
+    const allUsers:{id:number, email:string}[] = _allusers[0];
+    const setAllUsers = _allusers[1];
+
+
+
     const _tickets = useState([]);
     const tickets:{id:number, cost:number, band:string, name:string, place:string}[] = _tickets[0];
     const setUserTicketData = _tickets[1];
@@ -23,7 +29,12 @@ function ShowUsersContainer() {
     const _currentConcert = useState(0); // TODO: how made null?
     const currentConcert:number = _currentConcert[0];
     const setCurrentConcert = _currentConcert[1];
-    
+
+    const _search = useState(""); // TODO: how made null?
+    const search:string = _search[0];
+    const setSearch = _search[1];
+
+
 
     useEffect(() => {
         async function __() {
@@ -51,6 +62,7 @@ function ShowUsersContainer() {
                     })
             } else {
                 setUsers(data.data);
+                setAllUsers(data.data);
             }
         }
 
@@ -123,6 +135,40 @@ function ShowUsersContainer() {
         }
     }
 
+    const deleteUser = async (userId:number) => {
+        console.log(userId)
+            const method: string = "POST",
+                body: string = JSON.stringify({userId:userId}),
+                headers: object = {"Content-Type": 'application/json'};
+
+            // @ts-ignore TODO: fix
+            const response = await fetch(backendUrl + "/api/users/deleteUser", {method, body, headers})
+            const data = await response.json()
+            if (!response.ok) {
+                if (data.serverStatus === 500) {
+                    window.M.toast({
+                        html: "Error 500",
+                        displayLength: 5000,
+                        classes: "error"
+                    })
+                } else
+                    window.M.toast({
+                        html: "Error",
+                        displayLength: 5000,
+                        classes: "error"
+                    })
+            } else {
+                setUsers(users.filter(item=>item.id!==userId)as never[])
+            }
+        }
+
+    const searchChange = (event: { target: { value: string; }; }) => {
+        console.log(allUsers)
+        setSearch(event.target.value);
+        setUsers(allUsers.filter(item=>item.email.includes(event.target.value))as any)
+    }
+
+
     return (
         <ShowUsers
         users = {users}
@@ -132,6 +178,9 @@ function ShowUsersContainer() {
         concerts = {concerts}
         currentUser = {currentUser}
         currentConcert = {currentConcert}
+        deleteUser = {deleteUser}
+        searchChange = {searchChange}
+        search = {search}
         />
     );
 }

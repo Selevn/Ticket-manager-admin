@@ -22,6 +22,18 @@ concertRouter.post("/getHalls",
     });
   })
 
+concertRouter.post("/deleteUser",
+  async (request, response) => {
+    await deleteUser((err,data) => {
+      if(err)
+        response.status(500).json({err: err})
+      else
+        response.status(200).json({data: data})
+    });
+  })
+
+
+
 concertRouter.post("/getAllConcerts",
   async (request, response) => {
     await getAllConcerts((err,data) => {
@@ -62,9 +74,6 @@ concertRouter.post("/undo",
     });
   })
 
-
-
-
 concertRouter.post("/addConcert",
   async (request, response) => {
     await addConcert(request.body.band, request.body.place, request.body.date, request.body.imgSrc,(err,data) => {
@@ -84,11 +93,6 @@ concertRouter.post("/fillSectors",
         response.status(200).json({data: data})
     });
   })
-
-
-
-
-
 
 concertRouter.post("/add",
   async (request, response) => {

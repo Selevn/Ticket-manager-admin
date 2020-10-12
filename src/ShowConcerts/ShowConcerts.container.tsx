@@ -10,7 +10,7 @@ const backendUrl: string = 'http://localhost:3003'
 function ShowConcertsContainer() {
 
   let _concerts = useState([]);
-  const concerts = _concerts[0];
+  const concerts:{ id: number, band: string, date: string, place: string, imgSrc: string }[] = _concerts[0];
   const setConcerts = _concerts[1];
 
   useEffect(() => {
@@ -55,7 +55,6 @@ function ShowConcertsContainer() {
     // @ts-ignore TODO: fix
     const response = await fetch(backendUrl + "/api/concerts/delete", {method, body, headers})
     const data = await response.json()
-    console.log(data)
     if (!response.ok) {
       if (data.serverStatus === 500) {
         window.M.toast({
@@ -76,6 +75,9 @@ function ShowConcertsContainer() {
         displayLength: 5000,
         classes: "success"
       })
+
+      setConcerts(concerts.filter(item=>item.id!==concertId)as never[])
+
     }
   }
 
