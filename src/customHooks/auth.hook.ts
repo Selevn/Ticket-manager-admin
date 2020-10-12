@@ -1,9 +1,9 @@
 import React, {useCallback, useContext} from "react";
-import {LoginContext} from "../Contexts/LoginContext.ts";
+import {LoginContext} from "../Contexts/LoginContext";
 import * as jwt from "jsonwebtoken";
 
 
-const storage = "userStorage"
+const storage:string = "userStorage"
 export const useAuth = () => {
   const loginContext = useContext(LoginContext)
 
@@ -21,7 +21,8 @@ export const useAuth = () => {
   }, [])
 
   const isLoggined = useCallback(() => {
-    const data = JSON.parse(localStorage.getItem(storage));
+    const data = JSON.parse(<string>localStorage.getItem(storage));
+    // @ts-ignore
     return data && data.token && (Date.now() / 1000 < jwt.decode(data.token).exp);
   }, [])
 

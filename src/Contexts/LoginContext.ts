@@ -3,9 +3,9 @@ import React from "react"
 export const LoginContext = React.createContext({
   userId: null,
   token: null,
-  setUserId: () => {
+  setUserId: (id: any) => {
   },
-  setToken: () => {
+  setToken: (JWT: any) => {
   },
 });
 
