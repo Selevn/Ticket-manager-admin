@@ -87,6 +87,20 @@ background-color:#00000008;
 background-color:#00000010;
 }
 `
+const SearchUser = styled.input`
+padding:5px;
+display:flex;
+width:20%;
+padding-left:25px;
+flex-direction:row;
+justify-content:space-between;
+min-height:30px;
+cursor:pointer;
+font-size:1.2rem;
+margin-bottom:8px;
+align-self:left;
+margin-left:auto;
+`
 
 function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
   users: { id: number, email: string }[],
@@ -105,7 +119,7 @@ function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTi
   if (isLoggined())
     return (
         <Main>
-          <input onChange={searchChange} value={search}/>
+          <SearchUser onChange={searchChange} value={search}/>
           {users[0] && users.map(item => (<>
             <User key={item.id} onClick={() => {
               showUserConcerts(item.id)
