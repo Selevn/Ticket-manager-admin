@@ -60,6 +60,15 @@ const deleteUser = (id, cb)=>{
         cb(null, data);
     })
 }
+const deleteTicket = (ticketId,userId, cb)=>{
+  connection.query(`DELETE FROM ticket WHERE id = (?)`,[ticketId],
+    function (err, data) {
+      if (err)
+        cb(err, null);
+      else
+        cb(null, data);
+    })
+}
 
 
 
@@ -69,4 +78,5 @@ module.exports.getAllUsers = getAllUsers
 module.exports.getUserByEmail = getUserByEmail
 module.exports.getUserConcerts = getUserConcerts
 module.exports.getConcertTickets = getConcertTickets
+module.exports.deleteTicket = deleteTicket
 module.exports.deleteUser = deleteUser
