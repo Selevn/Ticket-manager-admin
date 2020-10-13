@@ -3,6 +3,59 @@ import {Link} from 'react-router-dom';
 import {useAuth} from "../customHooks/auth.hook";
 import {useHistory} from "react-router";
 
+import styled from "styled-components"
+
+const Main = styled.div`
+display:flex;
+padding:30px;
+width:100%;
+flex-direction:column;
+align-items:center;
+`
+
+const Label = styled.label`
+font-size:1.4rem;
+font-family:sans-serif;
+display:flex;
+padding:10px;
+width:30%;
+min-width:300px;
+flex-direction:row;
+justify-content: space-between;
+background-color:#00000010;
+`
+const Sector = styled.div`
+margin-top:10px;
+font-size:1.4rem;
+font-family:sans-serif;
+display:flex;
+background-color:#00000010;
+padding:10px;
+width:30%;
+min-width:360px;
+flex-direction:column;
+justify-content: space-between;
+`
+const Button = styled.button`
+font-size:1.2rem;
+border-radius:30%;
+box-shadow:none;
+background-color:#0000001a;
+outline:none;
+border:none;
+margin:.3rem;
+height:50px;
+width:120px;
+&:hover{
+cursor:pointer;
+background-color:#0000002a;
+}
+`
+
+
+
+
+
 interface IProps {
     Next: () => void;
     Confirm: () => void;
@@ -46,48 +99,48 @@ interface refsInerface {
 }
 
 
+
 function AddConcert({Next, disabled, halls, refs, sectors, Confirm}: IProps) {
   const {isLoggined} = useAuth()
   const history = useHistory();
   if (isLoggined())
     return (
-        <>
-            <Link to={'/showUsers'}>Show users</Link>
-            <label>Place:
+        <Main>
+            <Label>Place:
                 <select name="place" ref={refs.placeRef} disabled={disabled}>
                     {halls && halls.map((item: hallsInterface) => (
                         <option value={item.place} key={item.id}>{item.place}</option>))}
                 </select>
-            </label>
-            <label>ImgSrc:
+            </Label>
+            <Label>ImgSrc:
                 <input disabled={disabled} ref={refs.imgSrcRef} name="img" type="text" placeholder="ImgSrc"/>
-            </label>
-            <label>Band:
+            </Label>
+            <Label>Band:
                 <input disabled={disabled} ref={refs.bandRef} name="band" type="text" placeholder="Band"/>
-            </label>
-            <label>Date:
+            </Label>
+            <Label>Date:
                 <input disabled={disabled} ref={refs.dateRef} name="data" type="date" placeholder="Date"/>
-            </label>
-            <label>Time:
+            </Label>
+            <Label>Time:
                 <input disabled={disabled} ref={refs.timeRef} name="time" type="time" placeholder="Time"/>
-            </label>
-            <button disabled={disabled} onClick={Next}>Next</button>
+            </Label>
+            <Button disabled={disabled} onClick={Next}>Next</Button>
             {sectors && sectors[0] && (
                 <>
                     {sectors.map(item=>(
-                        <div>
+                        <Sector>
                             <b>Sector {item.name}:</b><br/>
                             Features:
                                 {item.features}
                             <br/>
-                            <label>Cost:
+                            <Label>Cost:
                                 <input name={item.name+"_cost"} type="number" min="1" step="any" placeholder="Cost"/>
-                            </label>
-                        </div>
+                            </Label>
+                        </Sector>
                     ))}
-                    <button onClick={Confirm}>Confirm</button>
+                    <Button onClick={Confirm}>Confirm</Button>
                 </>)}
-        </>
+        </Main>
     )
   else
   {

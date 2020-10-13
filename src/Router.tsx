@@ -11,9 +11,6 @@ function Router() {
       <>
         <Switch>
           <Route path='/login' component={LoginContaineer}/>
-          <Route path='/addConcert' component={AddConcertContainer}/>
-          <Route path='/showUsers' component={ShowUsersContainer}/>
-          <Route path='/showConcerts' component={ShowConcertsContainer}/>
           <Route path='/' component={AdminContainer}/>
         </Switch>
       </>

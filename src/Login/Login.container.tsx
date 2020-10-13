@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Login from "./Login";
 //import {backendUrl} from "../../config/default.json";
-import {useAuth} from "../customHooks/auth.hook.js";
+import {useAuth} from "../customHooks/auth.hook";
 
 import 'materialize-css'
 import {useHistory} from "react-router";

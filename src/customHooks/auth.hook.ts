@@ -8,7 +8,6 @@ export const useAuth = () => {
   const loginContext = useContext(LoginContext)
 
   const login = useCallback((JWT, id, type) => {
-    debugger;
     loginContext.setUserId(id)
     loginContext.setToken(JWT)
     localStorage.setItem(storage, JSON.stringify({userId: id, token: JWT, userType: type}))

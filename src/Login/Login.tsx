@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import style from "./Login.module.css"
 import {useHistory} from "react-router";
-import {useAuth} from "../customHooks/auth.hook.js";
+import {useAuth} from "../customHooks/auth.hook";
 
 const Login = ({email, onMailChange, password, onPasswordChange, loginHandler}:
                    {
