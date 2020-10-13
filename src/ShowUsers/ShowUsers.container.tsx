@@ -136,7 +136,6 @@ function ShowUsersContainer() {
     }
 
     const deleteUser = async (userId:number) => {
-        console.log(userId)
             const method: string = "POST",
                 body: string = JSON.stringify({userId:userId}),
                 headers: object = {"Content-Type": 'application/json'};
@@ -162,8 +161,41 @@ function ShowUsersContainer() {
             }
         }
 
+        const deleteTicket = async (ticketId:number,concertId:number) => {
+            const method: string = "POST",
+                body: string = JSON.stringify({userId:concertId, ticketId:ticketId}),
+                headers: object = {"Content-Type": 'application/json'};
+
+            // @ts-ignore TODO: fix
+            const response = await fetch(backendUrl + "/api/users/deleteTicket", {method, body, headers})
+            const data = await response.json()
+            if (!response.ok) {
+                if (data.serverStatus === 500) {
+                    window.M.toast({
+                        html: "Error 500",
+                        displayLength: 5000,
+                        classes: "error"
+                    })
+                } else
+                    window.M.toast({
+                        html: "Error",
+                        displayLength: 5000,
+                        classes: "error"
+                    })
+            } else {
+                setUserTicketData(tickets.filter(item=>item.id!==ticketId)as never[])
+                concerts.find(item=>item.concertId === concertId).ticketCount = concerts.find(item=>item.concertId === concertId).ticketCount-1;
+                console.log(concerts.find(item=>item.concertId === concertId));
+                //TODO:fix
+                //ставлю новую дату потому что не обновляется компонента ибо меняю не массив а лишь значение у элемента
+                //как сделать лучше?
+                const newConcerts = concerts.slice();
+                // @ts-ignore
+                setUserConcertData(newConcerts)
+            }
+        }
+
     const searchChange = (event: { target: { value: string; }; }) => {
-        console.log(allUsers)
         setSearch(event.target.value);
         setUsers(allUsers.filter(item=>item.email.includes(event.target.value))as any)
     }
@@ -179,6 +211,7 @@ function ShowUsersContainer() {
         currentUser = {currentUser}
         currentConcert = {currentConcert}
         deleteUser = {deleteUser}
+        deleteTicket = {deleteTicket}
         searchChange = {searchChange}
         search = {search}
         />

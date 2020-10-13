@@ -102,9 +102,11 @@ align-self:left;
 margin-left:auto;
 `
 
-function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
+
+function ShowUsers({deleteTicket,searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
   users: { id: number, email: string }[],
   showUserConcerts: (userId: number) => void,
+  deleteTicket: (ticketId:number, userId: number) => void,
   deleteUser: (userId: number) => void,
   searchChange: (event: { target: { value: string; }; }) => void,
   search: string,
@@ -134,26 +136,30 @@ function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTi
               {item.id === currentUser && concerts[0] && concerts.map(_item => {
                 return (
                     <>
-                    <Concert className={String(_item.concertId)} onClick={() => {
-                      showConcertTickets(currentUser, _item.concertId)
-                    }}>
-                      <Info>id: {_item.concertId}</Info>
-                      <Info>band: {_item.band}</Info>
-                      <Info>name: {_item.place}</Info>
-                      <Info>count: {_item.ticketCount}</Info>
-                    </Concert>
-                <Tickets>
-                  {_item.concertId === currentConcert && tickets.map(
-                      __item => {
-                        return (<Ticket id={String(_item.concertId) + "_1"}>
-                          <Info>id: {__item.id}</Info>
-                          <Info>sectorName: {__item.name}</Info>
-                          <Info>cost: {__item.cost}</Info>
-                        </Ticket>)
-                      }
-                  )}
-                </Tickets>
-                </>
+                      <Concert className={String(_item.concertId)} onClick={() => {
+                        showConcertTickets(currentUser, _item.concertId)
+                      }}>
+                        <Info>id: {_item.concertId}</Info>
+                        <Info>band: {_item.band}</Info>
+                        <Info>name: {_item.place}</Info>
+                        <Info>count: {_item.ticketCount}</Info>
+                      </Concert>
+                      <Tickets>
+                        {_item.concertId === currentConcert && tickets.map(
+                            __item => {
+                              return (<Ticket id={String(_item.concertId) + "_1"}>
+                                <Info>id: {__item.id}</Info>
+                                <Info>sectorName: {__item.name}</Info>
+                                <Info id={__item.id+"_cost"}>cost: {__item.cost}</Info>
+                                <Button small onClick={() => {
+                                  deleteTicket(__item.id,_item.concertId);
+                                  return false
+                                }}>Delete</Button>
+                              </Ticket>)
+                            }
+                        )}
+                      </Tickets>
+                    </>
                 )
               })}
             </UserConcerts>
