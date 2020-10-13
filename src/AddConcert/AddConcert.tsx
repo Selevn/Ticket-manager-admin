@@ -4,14 +4,9 @@ import {useAuth} from "../customHooks/auth.hook";
 import {useHistory} from "react-router";
 
 import styled from "styled-components"
+import Main from "../Styles/Main";
 
-const Main = styled.div`
-display:flex;
-padding:30px;
-width:100%;
-flex-direction:column;
-align-items:center;
-`
+
 
 const Label = styled.label`
 font-size:1.4rem;

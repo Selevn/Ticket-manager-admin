@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import AddConcertContainer from "../AddConcert/AddConcert.container";
 import ShowUsersContainer from "../ShowUsers/ShowUsers.container";
 import ShowConcertsContainer from "../ShowConcerts/ShowConcerts.container";
-
+import Button from "../Styles/Button";
 const Menu = styled.div`
 height:100vh;
 min-width:150px;
@@ -19,26 +19,10 @@ background-color:#0000ff30;
 align-items:left;
 `;
 const Main = styled.div`
-
 display:flex;
 flex-direction:row;
 `;
 
-const Button = styled.button`
-font-size:1.2rem;
-border-radius:30%;
-box-shadow:none;
-background-color:#0000001a;
-outline:none;
-border:none;
-margin:.3rem;
-height:50px;
-width:120px;
-&:hover{
-cursor:pointer;
-background-color:#0000002a;
-}
-`
 
 const MenuItem = styled.div`
 display:flex;
