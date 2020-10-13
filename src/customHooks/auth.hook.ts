@@ -3,7 +3,7 @@ import {LoginContext} from "../Contexts/LoginContext";
 import * as jwt from "jsonwebtoken";
 
 
-const storage:string = "userStorage"
+const storage: string = "userStorage"
 export const useAuth = () => {
   const loginContext = useContext(LoginContext)
 

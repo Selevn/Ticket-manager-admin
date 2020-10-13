@@ -103,13 +103,13 @@ margin-left:auto;
 `
 
 
-function ShowUsers({deleteTicket,searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
+function ShowUsers({deleteTicket, searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
   users: { id: number, email: string }[],
   showUserConcerts: (userId: number) => void,
-  deleteTicket: (ticketId:number, userId: number) => void,
+  deleteTicket: (ticketId: number, userId: number) => void,
   deleteUser: (userId: number) => void,
   searchChange: (event: { target: { value: string; }; }) => void,
-  search:string,
+  search: string,
   showConcertTickets: (userId: number, concertId: number) => void,
   tickets: { id: number, cost: number, band: string, name: string, place: string }[],
   concerts: { concertId: number, ticketCount: number, band: string, place: string }[],
@@ -129,9 +129,13 @@ function ShowUsers({deleteTicket,searchChange, search, users, showUserConcerts, 
             }}>
               {item.email}
             </div>
-            <button onClick = {()=>{deleteUser(item.id); return false}}>Delete</button>
+            <button onClick={() => {
+              deleteUser(item.id);
+              return false
+            }}>Delete
+            </button>
             <div>
-              {item.id === currentUser &&concerts[0]&& concerts.map(_item => {
+              {item.id === currentUser && concerts[0] && concerts.map(_item => {
                 return (
                     <>
                       <Concert className={String(_item.concertId)} onClick={() => {
@@ -148,9 +152,9 @@ function ShowUsers({deleteTicket,searchChange, search, users, showUserConcerts, 
                               return (<Ticket id={String(_item.concertId) + "_1"}>
                                 <Info>id: {__item.id}</Info>
                                 <Info>sectorName: {__item.name}</Info>
-                                <Info id={__item.id+"_cost"}>cost: {__item.cost}</Info>
+                                <Info id={__item.id + "_cost"}>cost: {__item.cost}</Info>
                                 <Button small onClick={() => {
-                                  deleteTicket(__item.id,_item.concertId);
+                                  deleteTicket(__item.id, _item.concertId);
                                   return false
                                 }}>Delete</Button>
                               </Ticket>)

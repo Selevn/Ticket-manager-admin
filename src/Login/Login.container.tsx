@@ -16,9 +16,9 @@ const LoginContainer = () => {
 
   const loginHandler = async () => {
     try {
-        let method = "POST",
+      let method = "POST",
           body = JSON.stringify({email: email, password: password}),
-          headers = {"Content-Type":'application/json'}
+          headers = {"Content-Type": 'application/json'}
       const response = await fetch("http://localhost:3003" + "/api/login/login", {method, body, headers})
       const data = await response.json()
       authHook.login(data.token, data.id, data.userType)
@@ -35,12 +35,12 @@ const LoginContainer = () => {
   }
 
   return (
-    <Login email={email}
-           onMailChange={onMailChange}
-           password={password}
-           onPasswordChange={onPasswordChange}
-           loginHandler={loginHandler}
-           />
+      <Login email={email}
+             onMailChange={onMailChange}
+             password={password}
+             onPasswordChange={onPasswordChange}
+             loginHandler={loginHandler}
+      />
   )
 };
 

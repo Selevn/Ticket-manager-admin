@@ -10,7 +10,7 @@ const backendUrl: string = 'http://localhost:3003'
 function ShowConcertsContainer() {
 
   let _concerts = useState([]);
-  const concerts:{ id: number, band: string, date: string, place: string, imgSrc: string }[] = _concerts[0];
+  const concerts: { id: number, band: string, date: string, place: string, imgSrc: string }[] = _concerts[0];
   const setConcerts = _concerts[1];
 
   useEffect(() => {
@@ -45,11 +45,11 @@ function ShowConcertsContainer() {
     __();
   }, [])
 
-  const deleteConcert = async (concertId:number) => {
+  const deleteConcert = async (concertId: number) => {
 
     const method: string = "POST",
         body: string = JSON.stringify({
-          concertId:concertId
+          concertId: concertId
         }),
         headers: object = {"Content-Type": 'application/json'};
     // @ts-ignore TODO: fix
@@ -76,16 +76,16 @@ function ShowConcertsContainer() {
         classes: "success"
       })
 
-      setConcerts(concerts.filter(item=>item.id!==concertId)as never[])
+      setConcerts(concerts.filter(item => item.id !== concertId) as never[])
 
     }
   }
 
-  const undoConcert = async (concertId:number) => {
+  const undoConcert = async (concertId: number) => {
 
     const method: string = "POST",
         body: string = JSON.stringify({
-          concertId:concertId
+          concertId: concertId
         }),
         headers: object = {"Content-Type": 'application/json'};
     // @ts-ignore TODO: fix
@@ -116,12 +116,12 @@ function ShowConcertsContainer() {
   }
 
 
-  const changeConcert = async (concertId:number, datetime:string) => {
+  const changeConcert = async (concertId: number, datetime: string) => {
 
     const method: string = "POST",
         body: string = JSON.stringify({
-          concertId:concertId,
-          date:datetime,
+          concertId: concertId,
+          date: datetime,
         }),
         headers: object = {"Content-Type": 'application/json'};
     // @ts-ignore TODO: fix
@@ -152,12 +152,10 @@ function ShowConcertsContainer() {
   }
 
 
-
-
-
-return (
-    <ShowConcerts concerts={concerts} deleteConcert={deleteConcert} changeConcert={changeConcert} undoConcert={undoConcert}/>
-);
+  return (
+      <ShowConcerts concerts={concerts} deleteConcert={deleteConcert} changeConcert={changeConcert}
+                    undoConcert={undoConcert}/>
+  );
 }
 
 export default ShowConcertsContainer;
