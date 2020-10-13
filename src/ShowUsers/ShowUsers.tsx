@@ -5,6 +5,7 @@ import {useAuth} from "../customHooks/auth.hook";
 import styled from "styled-components";
 
 import Button from "../Styles/Button";
+import Info from "../Styles/Info";
 
 const Main = styled.div`
 display:flex;
@@ -87,31 +88,6 @@ background-color:#00000010;
 }
 `
 
-
-const Info = styled.div`
-align-items:left;
-justify-content:space-between;
-width:250px;
-`
-
-/*
-const Button = styled.button`
-font-size:1.2rem;
-border-radius:30%;
-box-shadow:none;
-background-color:#0000001a;
-outline:none;
-border:none;
-margin:.3rem;
-height:50px;
-width:120px;
-&:hover{
-cursor:pointer;
-background-color:#0000002a;
-}
-`
-*/
-
 function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTickets, tickets, concerts, currentUser, currentConcert, deleteUser}: {
   users: { id: number, email: string }[],
   showUserConcerts: (userId: number) => void,
@@ -151,8 +127,6 @@ function ShowUsers({searchChange, search, users, showUserConcerts, showConcertTi
                       <Info>band: {_item.band}</Info>
                       <Info>name: {_item.place}</Info>
                       <Info>count: {_item.ticketCount}</Info>
-
-
                     </Concert>
                 <Tickets>
                   {_item.concertId === currentConcert && tickets.map(
