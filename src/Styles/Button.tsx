@@ -2,12 +2,7 @@ import styled from "styled-components";
 
 import { StyledFunction } from "styled-components"
 
-interface MyProps {
-  small: boolean
-}
-//@ts-ignore
-const Button: StyledFunction<MyProps & React.HTMLProps<HTMLInputElement>> = styled.button`
-//@ts-ignore
+const Button = styled.button`
 font-size:${props => props.small ? '.9rem' : '1.2rem'};
 //@ts-ignore
 border-radius:${props => props.small ? '10%' : '20%'};
