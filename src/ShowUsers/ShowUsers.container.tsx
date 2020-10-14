@@ -5,51 +5,21 @@ const backendUrl: string = 'http://localhost:3003'
 
 function ShowUsersContainer() {
 
-
-  /* const _users = useState([]);
-   const users:{id:number, email:string}[] = _users[0];
-   const setUsers = _users[1];*/
   const [users, setUsers] = useState<{ id: number, email: string }[]>([]);
 
-  /*const _allusers = useState([]);
-  const allUsers:{id:number, email:string}[] = _allusers[0];
-  const setAllUsers = _allusers[1];
-*/
   const [allUsers, setAllUsers] = useState<{ id: number, email: string }[]>([]);
 
-
-  /* const _tickets = useState([]);
-   const tickets:{id:number, cost:number, band:string, name:string, place:string}[] = _tickets[0];
-   const setUserTicketData = _tickets[1];*/
   const [tickets, setUserTicketData] = useState<{ id: number, cost: number, band: string, name: string, place: string }[]>([]);
 
-
-  /*const _concerts = useState([]);
-  const concerts:{concertId: number, ticketCount: number, band: string, place: string}[] = _concerts[0];
-  const setUserConcertData = _concerts[1];*/
   const [concerts, setUserConcertData] = useState<{ concertId: number, ticketCount: number, band: string, place: string }[]>([]);
-
-  /* const _currentUserId = useState(0);
-   const currentUser:number = _currentUserId[0];
-   const setCurrentUser = _currentUserId[1];*/
 
   const [currentUser, setCurrentUser] = useState<number>(0);
 
-
-  /*const _currentConcert = useState(0); //
-  const currentConcert:number = _currentConcert[0];
-  const setCurrentConcert = _currentConcert[1];*/
-
   const [currentConcert, setCurrentConcert] = useState<number>(0);
 
-
-  /* const _search = useState(""); //
-   const search:string = _search[0];
-   const setSearch = _search[1];*/
   const [search, setSearch] = useState<string>("")
 
   const [concertFlag, setConcertFlag] = useState(false);
-  //initial value useState ts
 
 
   const concertsChange = useCallback((concertInput) => {
