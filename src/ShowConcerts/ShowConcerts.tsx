@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {useAuth} from "../customHooks/auth.hook";
 import {useHistory} from "react-router";
+
 import Main from "../Styles/Main";
 import Button from "../Styles/Button";
 import Info from "../Styles/Info";

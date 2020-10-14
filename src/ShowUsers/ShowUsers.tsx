@@ -139,18 +139,18 @@ function ShowUsers({deleteTicket,searchChange, search, users, showUserConcerts, 
                       <Concert className={String(_item.concertId)} onClick={() => {
                         showConcertTickets(currentUser, _item.concertId)
                       }}>
-                        <Info>id: {_item.concertId}</Info>
-                        <Info>band: {_item.band}</Info>
-                        <Info>name: {_item.place}</Info>
-                        <Info>count: {_item.ticketCount}</Info>
+                        <Info>Id: {_item.concertId}</Info>
+                        <Info>Band: {_item.band}</Info>
+                        <Info>Name: {_item.place}</Info>
+                        <Info>Count: {_item.ticketCount}</Info>
                       </Concert>
                       <Tickets>
                         {_item.concertId === currentConcert && tickets.map(
                             __item => {
                               return (<Ticket id={String(_item.concertId) + "_1"}>
-                                <Info>id: {__item.id}</Info>
-                                <Info>sectorName: {__item.name}</Info>
-                                <Info id={__item.id+"_cost"}>cost: {__item.cost}</Info>
+                                <Info>Id: {__item.id}</Info>
+                                <Info>Sector name: {__item.name}</Info>
+                                <Info id={__item.id+"_cost"}>Cost: {__item.cost}</Info>
                                 <Button small onClick={() => {
                                   deleteTicket(__item.id,_item.concertId);
                                   return false
